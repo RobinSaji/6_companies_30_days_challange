@@ -1,0 +1,40 @@
+import java.util.Arrays;
+
+public class mindelete {
+    public static int GCD(int a,int b){
+        if(b==0){
+            return a;
+        }
+        return GCD(b,a%b);
+    }
+
+    public static int arr1(int[] arr){
+        int result = arr[0];
+        for(int i:arr){
+            result=GCD(i,result);
+        }
+        return result ;
+        
+
+    }
+    public static void main(String[] args) {
+        int []arr={9,15,18,21,3};
+        int []arr2={2,2,3,4};
+        int gcd = arr1(arr);
+        System.out.println(gcd);
+        int count=0;
+        for(int i=0;i<arr2.length;i++){
+            if(gcd%arr2[i]==0){
+                System.out.println(count);
+            }
+            else{
+                count++;
+            }
+        }
+        // System.out.println(gcd);
+
+        
+    }
+    
+    
+}
