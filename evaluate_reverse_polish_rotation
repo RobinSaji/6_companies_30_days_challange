@@ -1,32 +1,31 @@
-import java.util.Scanner;
-import java.util.Stack;
-
-public class reverse_polish {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        Stack<Integer> stk = new Stack<>();  
-        String arr[] ={"2","1","+","3","*"};
-        for(String i :arr){
-            if(i.equals("+") || i.equals("-") || i.equals("*") || i.equals("/"))  {
-                int num1=(int) stk.pop();
-                int num2=(int) stk.pop();
-                if (i.equals("+")) { 
-                    stk.push(num1 + num2); 
-                } else if (i.equals("-")) { 
-                    stk.push(num2 - num1); 
-                } else if (i.equals("*")) { 
-                    stk.push(num1 * num2); 
-                } else if (i.equals("/")) { 
-                    stk.push(num2 / num1); 
-                } 
+public class longesthappyface{
+    public static String happy(String ans){
+        char [] arr =ans.toCharArray();
+        int i=1;
+        int len =0;
+        int lps[] =new int[arr.length];
+        lps[0]=0;
+        while(i<arr.length){
+            if(arr[i]==arr[len]){
+                len++;
+                lps[i]=len;
+                i++;
             }
-            else { 
-                stk.push(Integer.parseInt(i)); 
+            else{
+                if(len!=0){
+                    len=lps[len-1];
+                }
+                else{
+                    lps[i]=0;
+                    i++;
+                }
             }
         }
-        System.out.println(stk.pop()); 
+        return ans.substring(0,lps[arr.length-1]);
+    }
 
-        
-
-    
-}}
+    public static void main(String[] args) {
+        String ans ="bbbdbbbbbd";
+        System.out.println(happy(ans));
+    }
+}
