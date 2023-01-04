@@ -1,36 +1,36 @@
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
+ /*
+ A string is called a happy prefix if is a non-empty prefix which is also a suffix (excluding itself).
 
-public class longesthappyface {
-    public static void main(String[] args) {
-        String str="ababab";
-        int[] arr=new int[str.length()];
+Given a string s, return the longest happy prefix of s. Return an empty string "" if no such prefix exists.
 
-        String [] arrpr = new String[str.length()-1];
-        String [] arrsu = new String[str.length()-1];
-        ArrayList <String> newarr = new ArrayList<>();
-        for(int i =0;i<str.length()-1;i++){
-            arrpr[i]= str.substring(0, i+1);
-            arrsu[i]= str.substring(str.length()-i-1,str.length());
-        }
-        for(int i =0;i<arrpr.length;i++){
-            if(arrpr[i].equals(arrsu[i])){
-                newarr.add(arrpr[i]);
+Input: s = "level"
+Output: "l"
+Explanation: s contains 4 prefix excluding itself ("l", "le", "lev", "leve"), and suffix ("l", "el", "vel", "evel"). 
+The largest prefix which is also suffix is given by "l".
+
+*/
+ 
+ 
+ 
+ 
+ 
+ public String longestPrefix(String s) {
+        int lps[] = new int[s.length()];
+        int len = 0, i = 1;
+        lps[0] = 0;
+        while (i < s.length()) {
+            if (s.charAt(i) == s.charAt(len)) {
+                len++;
+                lps[i] = len;
+                i++;
+            } else {
+                if (len != 0) {
+                    len = lps[len - 1];
+                } else {
+                    lps[i] = 0;
+                    i++;
+                }
             }
         }
-        System.out.println(newarr);
-
-    String longestString = newarr.get(0);
-    for (String element : newarr) {
-        if (element.length() > longestString.length()) {
-            longestString = element;
-        }
+        return s.substring(0, lps[lps.length - 1]);
     }
-    System.out.println(longestString);
-
-        
-
-
-    }
-}
